@@ -1,4 +1,5 @@
-# vueschool-forum
+# Vue School Forum Course
+2022-07
 
 ## Project setup
 ```
