@@ -1,15 +1,19 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import PageHome from '@/components/PageHome'
-import * as VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', component: PageHome }
+  {
+    path: '/',
+    name: 'Home',
+    component: PageHome
+  }
 ]
 
-const router = VueRouter.createRouter({
+const router = createRouter({
   // Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: VueRouter.createWebHistory(),
+  history: createWebHistory(),
   routes // short for `routes: routes`
 })
 
