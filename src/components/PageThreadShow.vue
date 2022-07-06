@@ -43,6 +43,13 @@ import sourceData from '@/data.json'
 export default {
   name: 'PageThreadShow',
 
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
+
   data () {
     return {
       threads: sourceData.threads,
@@ -53,7 +60,7 @@ export default {
 
   computed: {
     thread () {
-      return this.threads.find(thread => thread.id === this.$route.params.id)
+      return this.threads.find(thread => thread.id === this.id)
     }
   },
 
