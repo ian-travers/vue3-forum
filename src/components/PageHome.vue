@@ -44,24 +44,24 @@
 import sourceData from '@/data.json'
 
 export default {
-  name: "PageHome",
+  name: 'PageHome',
 
-  data() {
+  data () {
     return {
       threads: sourceData.threads,
       posts: sourceData.posts,
-      users: sourceData.users,
+      users: sourceData.users
     }
   },
 
   methods: {
-    postById(postId) {
+    postById (postId) {
       return this.posts.find(p => p.id === postId)
     },
 
-    userById(userId) {
+    userById (userId) {
       return this.users.find(u => u.id === userId)
-    },
+    }
   }
 }
 </script>
