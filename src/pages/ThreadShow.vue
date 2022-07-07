@@ -5,7 +5,7 @@
     <post-list :posts="threadPosts"/>
 
     <div class="col-full">
-      <form>
+      <form @submit.prevent="addPost">
         <div class="form-group">
           <textarea
             v-model="newPostText"
@@ -13,7 +13,7 @@
           />
         </div>
         <div class="form-actions">
-          <button class="btn-blue" type="button">Submit Post</button>
+          <button class="btn-blue">Submit Post</button>
         </div>
       </form>
     </div>
@@ -46,6 +46,24 @@ export default {
     },
     threadPosts () {
       return this.posts.filter(post => post.threadId === this.id)
+    }
+  },
+  methods: {
+    addPost () {
+      const postId = 'ggg' + Math.random()
+
+      const post = {
+        id: postId,
+        text: this.newPostText,
+        publishedAt: Math.floor(Date.now() / 1000),
+        threadId: this.id,
+        userId: 'ALXhxjwgY9PinwNGHpfai6OWyDu2'
+      }
+
+      this.posts.push(post)
+      this.thread.posts.push(postId)
+
+      this.newPostText = ''
     }
   }
 }
