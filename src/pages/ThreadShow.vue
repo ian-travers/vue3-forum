@@ -8,8 +8,7 @@
       <form>
         <div class="form-group">
           <textarea
-            :value="newPostText"
-            @input="newPostText = $event.target.value"
+            v-model="newPostText"
             class="form-input"
           />
         </div>
