@@ -4,6 +4,7 @@
     :key="category.id"
     :forums="getForumsForCategory(category)"
     :title="category.name"
+    :category-id="category.id"
   />
 </template>
 

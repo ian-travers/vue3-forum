@@ -3,7 +3,8 @@
     <div class="forum-list">
 
       <h2 class="list-title">
-        <a href="#">{{ title }}</a>
+        <router-link v-if="categoryId" :to="{name: 'Category', params: {id: categoryId}}">{{ title }}</router-link>
+        <span v-else>{{ title }}</span>
       </h2>
 
       <div class="forum-listing" v-for="forum in forums" :key="forum.id">
@@ -41,6 +42,10 @@ export default {
     title: {
       type: String,
       default: 'Forums'
+    },
+    categoryId: {
+      type: String,
+      required: false
     }
   },
   methods: {
