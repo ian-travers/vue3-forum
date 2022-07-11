@@ -42,8 +42,7 @@ export default {
         threadId: this.id
       }
 
-      this.posts.push(post)
-      this.thread.posts.push(post.id)
+      this.$store.dispatch('createPost', post)
     }
   }
 }

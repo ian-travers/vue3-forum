@@ -24,10 +24,7 @@ export default {
   },
   methods: {
     save () {
-      const postId = 'ggg' + Math.random()
-
       const post = {
-        id: postId,
         text: this.text,
         publishedAt: Math.floor(Date.now() / 1000),
         userId: 'HJNTR1nN8tgbB148RJrPYbby8Vl1'
