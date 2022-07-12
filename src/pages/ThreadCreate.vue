@@ -34,8 +34,8 @@
 export default {
   name: 'ThreadCreate',
   props: {
-    forum: {
-      type: Object,
+    forumId: {
+      type: String,
       required: true
     }
   },
@@ -45,10 +45,15 @@ export default {
       text: ''
     }
   },
+  computed: {
+    forum () {
+      return this.$store.state.forums.find(forum => forum.id === this.forumId)
+    }
+  },
   methods: {
     save () {
       this.$store.dispatch('createThread', {
-        forumId: this.forum.id,
+        forumId: this.forumId,
         title: this.title,
         text: this.text
       })
