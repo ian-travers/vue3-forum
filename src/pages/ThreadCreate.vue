@@ -8,6 +8,7 @@
 
 <script>
 import ThreadEditor from '@/components/ThreadEditor'
+import { findById } from '@/helpers'
 
 export default {
   name: 'ThreadCreate',
@@ -22,7 +23,7 @@ export default {
   },
   computed: {
     forum () {
-      return this.$store.state.forums.find(forum => forum.id === this.forumId)
+      return findById(this.$store.state.forums,  this.forumId)
     }
   },
   methods: {
