@@ -25,11 +25,10 @@
 <script>
 import PostList from '@/components/PostList'
 import PostEditor from '@/components/PostEditor'
-import AppDate from '@/components/AppDate'
 
 export default {
   name: 'ThreadShow',
-  components: { AppDate, PostEditor, PostList },
+  components: { PostEditor, PostList },
   props: {
     id: {
       type: String,
