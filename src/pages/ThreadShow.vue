@@ -11,7 +11,7 @@
 
     <p>
       By, <a href="#" class="link-unstyled">{{ thread.author.name }}</a>, <AppDate :timestamp="thread.publishedAt"/>.
-      <span style="float: right; margin-top: 2px" class="hide-mobile text-faded text-small">
+      <span v-show="!!thread.repliesCount" style="float: right; margin-top: 2px" class="hide-mobile text-faded text-small">
         {{ thread.repliesCount }} replies by {{ thread.contributorsCount }} contributors
       </span>
     </p>
