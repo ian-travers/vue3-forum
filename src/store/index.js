@@ -1,10 +1,13 @@
 import { createStore } from 'vuex'
-import sourceData from '@/data.json'
 import { findById, upsert } from '@/helpers'
 
 export default createStore({
   state: {
-    ...sourceData,
+    categories: [],
+    forums: [],
+    threads: [],
+    posts: [],
+    users: [],
     authId: 'f5xvKdIPQdSrUtT6i3UiHYttRXO2'
   },
   getters: {
