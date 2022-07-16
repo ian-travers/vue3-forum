@@ -1,7 +1,7 @@
 export const findById = (resource, id) => {
   if (!resource) return null
 
-  resource.find(r => r.id === id)
+  return resource.find(r => r.id === id)
 }
 
 export const upsert = (resources, resource) => {
