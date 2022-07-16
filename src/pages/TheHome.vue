@@ -6,7 +6,6 @@
 
 <script>
 import CategoryList from '@/components/CategoryList'
-import { db } from '@/firebase'
 
 export default {
   components: {
@@ -28,7 +27,6 @@ export default {
   },
   mounted () {
     console.log('mounted', this.categories, this.$el)
-    console.log(db)
   },
   beforeUnmount () {
     console.log('beforeUnmount', this.categories, this.$el)
