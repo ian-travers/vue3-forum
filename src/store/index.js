@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { findById, upsert } from '@/helpers'
+import firebase from 'firebase'
 
 export default createStore({
   state: {
@@ -91,6 +92,16 @@ export default createStore({
     },
     updateUser ({ commit }, user) {
       commit('setUser', { user, userId: user.id })
+    },
+    fetchThread ({ state, commit }, { id }) {
+      console.log('Thread Id = ', id)
+      return new Promise((resolve) => {
+        firebase.firestore().collection('threads').doc(id).onSnapshot((doc) => {
+          const thread = { ...doc.data(), id: doc.id }
+          commit('setThread', { thread })
+          resolve(thread)
+        })
+      })
     }
   },
   mutations: {

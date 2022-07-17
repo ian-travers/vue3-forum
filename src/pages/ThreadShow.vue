@@ -60,28 +60,25 @@ export default {
       this.$store.dispatch('createPost', post)
     }
   },
-  created () {
+  async created () {
     // fetch the thread
-    firebase.firestore().collection('threads').doc(this.id).onSnapshot((doc) => {
-      const thread = { ...doc.data(), id: doc.id }
-      this.$store.commit('setThread', { thread })
+    const thread = await this.$store.dispatch('fetchThread', { id: this.id })
 
-      // fetch the user
-      firebase.firestore().collection('users').doc(thread.userId).onSnapshot((doc) => {
-        const user = { ...doc.data(), id: doc.id }
-        this.$store.commit('setUser', { user })
-      })
+    // fetch the user
+    firebase.firestore().collection('users').doc(thread.userId).onSnapshot((doc) => {
+      const user = { ...doc.data(), id: doc.id }
+      this.$store.commit('setUser', { user })
+    })
 
-      // fetch the posts
-      thread.posts.forEach(postId => {
-        firebase.firestore().collection('posts').doc(postId).onSnapshot((doc) => {
-          const post = { ...doc.data(), id: doc.id }
-          // fetch the author of the post
-          firebase.firestore().collection('users').doc(post.userId).onSnapshot((doc) => {
-            const user = { ...doc.data(), id: doc.id }
-            this.$store.commit('setUser', { user })
-            this.$store.commit('setPost', { post })
-          })
+    // fetch the posts
+    thread.posts.forEach(postId => {
+      firebase.firestore().collection('posts').doc(postId).onSnapshot((doc) => {
+        const post = { ...doc.data(), id: doc.id }
+        // fetch the author of the post
+        firebase.firestore().collection('users').doc(post.userId).onSnapshot((doc) => {
+          const user = { ...doc.data(), id: doc.id }
+          this.$store.commit('setUser', { user })
+          this.$store.commit('setPost', { post })
         })
       })
     })
