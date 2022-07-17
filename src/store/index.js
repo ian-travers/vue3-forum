@@ -102,6 +102,16 @@ export default createStore({
           resolve(thread)
         })
       })
+    },
+    fetchUser ({ state, commit }, { id }) {
+      console.log('User Id = ', id)
+      return new Promise((resolve) => {
+        firebase.firestore().collection('users').doc(id).onSnapshot((doc) => {
+          const user = { ...doc.data(), id: doc.id }
+          commit('setUser', { user })
+          resolve(user)
+        })
+      })
     }
   },
   mutations: {
