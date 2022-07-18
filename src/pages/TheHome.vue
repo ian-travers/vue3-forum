@@ -17,6 +17,7 @@ export default {
     }
   },
   beforeCreate () {
+    this.$store.dispatch('fetchAllCategories')
     console.log('before create', this.categories)
   },
   created () {
