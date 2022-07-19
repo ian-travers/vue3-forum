@@ -44,6 +44,7 @@ export default {
   fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }),
   fetchPost: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '💬', resource: 'posts' }),
   fetchUser: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🙋', resource: 'users' }),
+  fetchAuthUser: ({ dispatch, state }) => dispatch('fetchItem', { id: state.authId, emoji: '🙋', resource: 'users' }),
 
   fetchAllCategories ({ commit }) {
     console.log('🔥', '🏷', 'all')
