@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['createPost', 'fetchThread', 'fetchPosts', 'fetchUser', 'fetchUsers']),
+    ...mapActions(['createPost', 'fetchThread', 'fetchPosts', 'fetchUsers']),
     addPost (eventData) {
       const post = {
         ...eventData.post,
@@ -65,14 +65,11 @@ export default {
     // fetch the thread
     const thread = await this.fetchThread({ id: this.id })
 
-    // fetch the user
-    this.fetchUser({ id: thread.userId })
-
     // fetch the posts
     const posts = await this.fetchPosts({ ids: thread.posts })
 
     // fetch the users associated with the posts
-    const users = posts.map(post => post.userId)
+    const users = posts.map(post => post.userId).concat(thread.userId)
     this.fetchUsers({ ids: users })
   }
 }
