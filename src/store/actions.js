@@ -39,21 +39,11 @@ export default {
   // ---------------------
   // Fetch Single Resource
   // ---------------------
-  fetchCategory ({ dispatch }, { id }) {
-    return dispatch('fetchItem', { id, emoji: '🏷', resource: 'categories' })
-  },
-  fetchForum ({ dispatch }, { id }) {
-    return dispatch('fetchItem', { id, emoji: '🗄', resource: 'forums' })
-  },
-  fetchThread ({ dispatch }, { id }) {
-    return dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' })
-  },
-  fetchPost ({ dispatch }, { id }) {
-    return dispatch('fetchItem', { id, emoji: '💬', resource: 'posts' })
-  },
-  fetchUser ({ dispatch }, { id }) {
-    return dispatch('fetchItem', { id, emoji: '🙋', resource: 'users' })
-  },
+  fetchCategory: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🏷', resource: 'categories' }),
+  fetchForum: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🗄', resource: 'forums' }),
+  fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }),
+  fetchPost: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '💬', resource: 'posts' }),
+  fetchUser: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🙋', resource: 'users' }),
 
   fetchAllCategories ({ commit }) {
     console.log('🔥', '🏷', 'all')
@@ -75,21 +65,11 @@ export default {
   // ---------------------
   // Fetch Multiple Resources
   // ---------------------
-  fetchCategories ({ dispatch }, { ids }) {
-    return dispatch('fetchItems', { ids, emoji: '🏷', resource: 'categories' })
-  },
-  fetchForums ({ dispatch }, { ids }) {
-    return dispatch('fetchItems', { ids, emoji: '🗄', resource: 'forums' })
-  },
-  fetchThreads ({ dispatch }, { ids }) {
-    return dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' })
-  },
-  fetchPosts ({ dispatch }, { ids }) {
-    return dispatch('fetchItems', { ids, emoji: '💬', resource: 'posts' })
-  },
-  fetchUsers ({ dispatch }, { ids }) {
-    return dispatch('fetchItems', { ids, emoji: '🙋', resource: 'users' })
-  },
+  fetchCategories: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🏷', resource: 'categories' }),
+  fetchForums: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🗄', resource: 'forums' }),
+  fetchThreads: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' }),
+  fetchPosts: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '💬', resource: 'posts' }),
+  fetchUsers: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🙋', resource: 'users' }),
 
   fetchItem ({ state, commit }, { id, emoji, resource }) {
     console.log('🔥', emoji, id)
