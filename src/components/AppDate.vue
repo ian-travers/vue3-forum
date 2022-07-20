@@ -1,6 +1,6 @@
 <template>
-  <span :title="humanFriendlyDate()">
-    {{ diffForHumans() }}
+  <span :title="humanFriendlyDate">
+    {{ diffForHumans }}
   </span>
 </template>
 
@@ -15,16 +15,19 @@ export default {
   name: 'AppDate',
   props: {
     timestamp: {
-      type: Number,
+      type: [Number, Object],
       required: true
     }
   },
-  methods: {
+  computed: {
+    normalizedTimestamp () {
+      return this.timestamp?.seconds || this.timestamp
+    },
     diffForHumans () {
-      return dayjs.unix(this.timestamp).fromNow()
+      return dayjs.unix(this.normalizedTimestamp).fromNow()
     },
     humanFriendlyDate () {
-      return dayjs.unix(this.timestamp).format('llll')
+      return dayjs.unix(this.normalizedTimestamp).format('llll')
     }
   }
 }
