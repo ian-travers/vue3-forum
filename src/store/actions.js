@@ -1,4 +1,4 @@
-import { findById } from '@/helpers'
+import { docToResource, findById } from '@/helpers'
 import firebase from 'firebase'
 
 export default {
@@ -21,7 +21,7 @@ export default {
     await batch.commit()
 
     const newPost = await postRef.get()
-    commit('setItem', { resource: 'posts', item: { ...newPost.data(), id: newPost.id } }) // set the post
+    commit('setItem', { resource: 'posts', item: docToResource(newPost) }) // set the post
     commit('appendPostToThread', { childId: newPost.id, parentId: post.threadId }) // append post to thread
     commit('appendContributorToThread', { childId: state.authId, parentId: post.threadId })
   },
@@ -45,7 +45,7 @@ export default {
     await batch.commit()
 
     const newThread = await threadRef.get()
-    commit('setItem', { resource: 'threads', item: { ...newThread.data(), id: newThread.id } })
+    commit('setItem', { resource: 'threads', item: docToResource(newThread) })
     commit('appendThreadToForum', { childId: threadRef.id, parentId: forumId })
     commit('appendThreadToUser', { childId: threadRef.id, parentId: userId })
     await dispatch('createPost', { text, threadId: threadRef.id })
@@ -81,7 +81,7 @@ export default {
     commit('setItem', { resource: 'threads', item: newThread })
     commit('setItem', { resource: 'posts', item: newPost })
 
-    return newThread
+    return docToResource(newThread)
   },
   updateUser ({ commit }, user) {
     commit('setUser', { resource: 'users', item: user })
