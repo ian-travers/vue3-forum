@@ -4,6 +4,12 @@ import router from '@/router'
 import store from '@/store'
 import firebase from 'firebase'
 import firebaseConfig from '@/config/firebase'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faPencilAlt)
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
@@ -23,4 +29,5 @@ requireComponent.keys().forEach(function (fileName) {
   forumApp.component(baseComponentName, baseComponentConfig)
 })
 
+forumApp.component('font-awesome-icon', FontAwesomeIcon)
 forumApp.mount('#app')
