@@ -24,7 +24,7 @@
           </p>
         </div>
         <a href="#" class="link-unstyled" title="Make a Change" style="margin-left: auto; padding-left: .5rem">
-          <font-awesome-icon icon="pencil-alt"/>
+          <fa-icon icon="pencil-alt"/>
         </a>
       </div>
 
