@@ -5,9 +5,6 @@
 
       <div v-for="thread in threads" :key="thread.id" class="thread">
         <div>
-          <div class="">
-            {{ thread.id }}
-          </div>
           <p>
             <router-link
               v-if="typeof thread.id !== 'undefined'"
