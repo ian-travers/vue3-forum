@@ -9,10 +9,14 @@ export default {
     const batch = firebase.firestore().batch()
     const postRef = firebase.firestore().collection('posts').doc()
     const threadRef = firebase.firestore().collection('threads').doc(post.threadId)
+    const userRef = firebase.firestore().collection('users').doc(state.authId)
     batch.set(postRef, post)
     batch.update(threadRef, {
       posts: firebase.firestore.FieldValue.arrayUnion(postRef.id),
       contributors: firebase.firestore.FieldValue.arrayUnion(state.authId)
+    })
+    batch.update(userRef, {
+      postsCount: firebase.firestore.FieldValue.increment(1)
     })
     await batch.commit()
 
@@ -21,6 +25,7 @@ export default {
     commit('appendPostToThread', { childId: newPost.id, parentId: post.threadId }) // append post to thread
     commit('appendContributorToThread', { childId: state.authId, parentId: post.threadId })
   },
+
   async createThread ({ commit, state, dispatch }, { text, title, forumId }) {
     const userId = state.authId
     const publishedAt = firebase.firestore.FieldValue.serverTimestamp()
@@ -47,6 +52,7 @@ export default {
 
     return findById(state.threads, threadRef.id)
   },
+
   async updateThread ({ commit, state }, { title, text, id }) {
     const thread = findById(state.threads, id)
     const post = findById(state.posts, thread.posts[0])
@@ -108,6 +114,7 @@ export default {
       })
     })
   },
+
   fetchItems ({ dispatch }, { ids, emoji, resource }) {
     return Promise.all(ids.map(id => dispatch('fetchItem', { id, emoji, resource })))
   }
