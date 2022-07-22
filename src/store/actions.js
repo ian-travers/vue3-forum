@@ -100,6 +100,10 @@ export default {
 
     return docToResource(newThread)
   },
+  async registerUserWithEmailAndPassword ({ dispatch }, { avatar = null, name, email, username, password }) {
+    const result = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    dispatch('createUser', { id: result.user.uid, email, name, username, avatar })
+  },
   async createUser ({ commit }, { id, name, username, email, avatar = null }) {
     const registeredAt = firebase.firestore.FieldValue.serverTimestamp()
     const usernameLower = username.toLowerCase()
