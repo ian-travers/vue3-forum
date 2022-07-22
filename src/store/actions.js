@@ -100,13 +100,13 @@ export default {
 
     return docToResource(newThread)
   },
-  async createUser ({ commit }, { name, username, email, avatar = null }) {
+  async createUser ({ commit }, { id, name, username, email, avatar = null }) {
     const registeredAt = firebase.firestore.FieldValue.serverTimestamp()
     const usernameLower = username.toLowerCase()
     email = email.toLowerCase()
 
     const user = { avatar, email, name, username, usernameLower, registeredAt }
-    const userRef = firebase.firestore().collection('users').doc()
+    const userRef = firebase.firestore().collection('users').doc(id)
     await userRef.set(user)
 
     const newUser = await userRef.get()

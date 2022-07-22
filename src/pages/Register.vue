@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'RegisterForm',
   data () {
@@ -58,7 +60,8 @@ export default {
   },
   methods: {
     async register () {
-      await this.$store.dispatch('createUser', this.form)
+      const result = await firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password)
+      await this.$store.dispatch('createUser', { id: result.user.uid, ...this.form })
       this.$router.push('/')
     }
   },
