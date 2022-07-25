@@ -137,10 +137,10 @@ export default {
   fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }),
   fetchPost: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '💬', resource: 'posts' }),
   fetchUser: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🙋', resource: 'users' }),
-  fetchAuthUser: ({ dispatch, state, commit }) => {
+  fetchAuthUser: ({ dispatch, commit }) => {
     const userId = firebase.auth().currentUser?.uid
     if (!userId) return
-    dispatch('fetchItem', { emoji: '🙋', resource: 'users', id: state.authId })
+    dispatch('fetchItem', { emoji: '🙋', resource: 'users', id: userId })
     commit('setAuthId', userId)
   },
 
