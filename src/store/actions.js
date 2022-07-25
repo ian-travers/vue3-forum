@@ -151,7 +151,14 @@ export default {
   fetchAuthUser: ({ dispatch, commit }) => {
     const userId = firebase.auth().currentUser?.uid
     if (!userId) return
-    dispatch('fetchItem', { emoji: '🙋', resource: 'users', id: userId })
+    dispatch('fetchItem', {
+      emoji: '🙋',
+      resource: 'users',
+      id: userId,
+      handleUnsubscribe: (unsubscribe) => {
+        commit('setAuthUserUnsubscribe', unsubscribe)
+      }
+    })
     commit('setAuthId', userId)
   },
 
@@ -181,7 +188,7 @@ export default {
   fetchPosts: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '💬', resource: 'posts' }),
   fetchUsers: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🙋', resource: 'users' }),
 
-  fetchItem ({ state, commit }, { id, emoji, resource }) {
+  fetchItem ({ state, commit }, { id, emoji, resource, handleUnsubscribe = null }) {
     console.log('🔥', emoji, id)
 
     return new Promise((resolve) => {
@@ -190,7 +197,12 @@ export default {
         commit('setItem', { resource, item })
         resolve(item)
       })
-      commit('appendUnsubscribe', { unsubscribe })
+
+      if (handleUnsubscribe) {
+        handleUnsubscribe(unsubscribe)
+      } else {
+        commit('appendUnsubscribe', { unsubscribe })
+      }
     })
   },
 
@@ -201,5 +213,12 @@ export default {
   async unsubscribeAllSnapshots ({ state, commit }) {
     state.unsubscribes.forEach(unsubscribe => unsubscribe())
     commit('clearAllUnsubscribes')
+  },
+
+  async unsubscribeAuthUserSnapshot ({ state, commit }) {
+    if (state.authUserUnsubscribe) {
+      state.authUserUnsubscribe()
+      commit('setAuthUserUnsubscribe', null)
+    }
   }
 }
