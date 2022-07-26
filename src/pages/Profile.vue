@@ -24,7 +24,6 @@
 // import UserProfileCard from '@/components/UserProfileCard'
 // import UserProfileCardEditor from '@/components/UserProfileCardEditor'
 import { mapGetters } from 'vuex'
-import store from '@/store'
 
 export default {
   name: 'PageProfile',
@@ -39,11 +38,6 @@ export default {
     ...mapGetters({ user: 'authUser' }),
     userPosts () {
       return this.$store.state.posts.filter(post => post.userId === this.user.id)
-    }
-  },
-  beforeRouteEnter (to, from) {
-    if (!store.state.authId) {
-      return { name: 'Home' }
     }
   },
   created () {
