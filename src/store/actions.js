@@ -163,7 +163,7 @@ export default {
   },
 
   fetchAllCategories ({ commit }) {
-    console.log('🔥', '🏷', 'all')
+    // console.log('🔥', '🏷', 'all')
 
     return new Promise((resolve) => {
       firebase.firestore().collection('categories').onSnapshot((querySnapshot) => {
@@ -189,7 +189,7 @@ export default {
   fetchUsers: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🙋', resource: 'users' }),
 
   fetchItem ({ state, commit }, { id, emoji, resource, handleUnsubscribe = null }) {
-    console.log('🔥', emoji, id)
+    // console.log('🔥', emoji, id)
 
     return new Promise((resolve) => {
       const unsubscribe = firebase.firestore().collection(resource).doc(id).onSnapshot((doc) => {
