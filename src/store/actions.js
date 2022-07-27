@@ -181,6 +181,14 @@ export default {
     commit('setAuthId', userId)
   },
 
+  async fetchAuthUsersPosts ({ commit, state }) {
+    const posts = await firebase.firestore().collection('posts').where('userId', '==', state.authId).get()
+
+    posts.forEach(item => {
+      commit('setItem', { resource: 'posts', item: item })
+    })
+  },
+
   fetchAllCategories ({ commit }) {
     // console.log('🔥', '🏷', 'all')
 

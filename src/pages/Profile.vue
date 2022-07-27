@@ -1,28 +1,28 @@
 <template>
-  <div class="container">
-    <h1>Profile Page</h1>
-<!--    <div class="flex-grid">-->
-<!--      <div class="col-3 push-top">-->
-<!--        <UserProfileCardEditor v-if="edit" :user="user"/>-->
-<!--        <UserProfileCard v-else :user="user"/>-->
-<!--      </div>-->
+  <div class="container" style="width: 100%">
+    <div class="flex-grid">
+      <div class="col-3 push-top">
+        <UserProfileCardEditor v-if="edit" :user="user"/>
+        <UserProfileCard v-else :user="user"/>
+      </div>
 
-<!--      <div class="col-7 push-top">-->
-<!--        <div class="profile-header">-->
-<!--          <span class="text-lead"><b>{{ user.username }}</b> recent activity</span>-->
-<!--          <a href="#">See only started threads?</a>-->
-<!--        </div>-->
-<!--        <hr />-->
-<!--        <PostList :posts="user.posts" />-->
-<!--      </div>-->
-<!--    </div>-->
+      <div class="col-7 push-top">
+        <div class="profile-header">
+          <span class="text-lead"><b>{{ user.username }}</b> recent activity</span>
+          <a href="#">See only started threads?</a>
+        </div>
+        <hr />
+        <PostList :posts="user.posts" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import PostList from '@/components/PostList'
-// import UserProfileCard from '@/components/UserProfileCard'
-// import UserProfileCardEditor from '@/components/UserProfileCardEditor'
+import PostList from '@/components/PostList'
+import UserProfileCard from '@/components/UserProfileCard'
+import UserProfileCardEditor from '@/components/UserProfileCardEditor'
+import asyncDataStatus from '@/mixins/asyncDataStatus'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -33,15 +33,17 @@ export default {
       default: false
     }
   },
-  // components: { UserProfileCard, UserProfileCardEditor, PostList },
+  mixins: [asyncDataStatus],
+  components: { UserProfileCard, UserProfileCardEditor, PostList },
   computed: {
     ...mapGetters({ user: 'authUser' }),
     userPosts () {
       return this.$store.state.posts.filter(post => post.userId === this.user.id)
     }
   },
-  created () {
-    this.$emit('ready')
+  async created () {
+    await this.$store.dispatch('fetchAuthUsersPosts')
+    this.asyncDataStatus_fetched()
   }
 }
 </script>
