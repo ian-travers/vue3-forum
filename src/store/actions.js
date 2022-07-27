@@ -3,7 +3,7 @@ import firebase from 'firebase'
 
 export default {
   initAuthentication ({ commit, state, dispatch }) {
-    if (state.authObserverUnsubscribe) state.authObserverUnsubscribe()
+    if (state.authObserverUnsubscribe) return
 
     return new Promise((resolve) => {
       const unsubscribe = firebase.auth().onAuthStateChanged(async user => {
@@ -17,7 +17,7 @@ export default {
         }
       })
 
-      commit('setAuthObserverUnsubscribe', unsubscribe())
+      commit('setAuthObserverUnsubscribe', unsubscribe)
     })
   },
 
