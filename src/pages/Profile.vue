@@ -36,13 +36,13 @@ export default {
   mixins: [asyncDataStatus],
   components: { UserProfileCard, UserProfileCardEditor, PostList },
   computed: {
-    ...mapGetters({ user: 'authUser' }),
+    ...mapGetters('auth', { user: 'authUser' }),
     userPosts () {
-      return this.$store.state.posts.filter(post => post.userId === this.user.id)
+      return this.$store.state.posts.items.filter(post => post.userId === this.user.id)
     }
   },
   async created () {
-    await this.$store.dispatch('fetchAuthUsersPosts')
+    await this.$store.dispatch('auth/fetchAuthUsersPosts')
     this.asyncDataStatus_fetched()
   }
 }
