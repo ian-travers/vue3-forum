@@ -2,11 +2,12 @@ import { docToResource, findById, makeAppendChildToParentMutation } from '@/help
 import firebase from 'firebase'
 
 export default {
+  namespaced: true,
   state: {
     items: []
   },
   getters: {
-    thread: state => {
+    thread: (state, getters, rootState) => {
       return (id) => {
         const thread = findById(state.items, id)
 
@@ -15,7 +16,7 @@ export default {
         return {
           ...thread,
           get author () {
-            return findById(state.users, thread.userId)
+            return findById(rootState.users.items, thread.userId)
           },
           get repliesCount () {
             return thread.posts.length - 1
@@ -47,10 +48,10 @@ export default {
       await batch.commit()
 
       const newThread = await threadRef.get()
-      commit('setItem', { resource: 'threads', item: docToResource(newThread) })
-      commit('appendThreadToForum', { childId: threadRef.id, parentId: forumId })
-      commit('appendThreadToUser', { childId: threadRef.id, parentId: userId })
-      await dispatch('createPost', { text, threadId: threadRef.id })
+      commit('setItem', { resource: 'threads', item: docToResource(newThread) }, { root: true })
+      commit('forums/appendThreadToForum', { childId: threadRef.id, parentId: forumId }, { root: true })
+      commit('users/appendThreadToUser', { childId: threadRef.id, parentId: userId }, { root: true })
+      await dispatch('posts/createPost', { text, threadId: threadRef.id }, { root: true })
 
       return findById(state.items, threadRef.id)
     },
@@ -80,14 +81,14 @@ export default {
         id: postRef.id
       }
 
-      commit('setItem', { resource: 'threads', item: newThread })
-      commit('setItem', { resource: 'posts', item: newPost })
+      commit('setItem', { resource: 'threads', item: newThread }, { root: true })
+      commit('setItem', { resource: 'posts', item: newPost }, { root: true })
 
       return docToResource(newThread)
     },
 
-    fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }),
-    fetchThreads: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' })
+    fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }, { root: true }),
+    fetchThreads: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' }, { root: true })
   },
   mutations: {
     appendPostToThread: makeAppendChildToParentMutation({ parent: 'threads', child: 'posts' }),
