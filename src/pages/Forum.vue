@@ -69,6 +69,12 @@ export default {
       return Math.ceil(this.threadsCount / this.perPage)
     }
   },
+  watch: {
+    async page (page) {
+      const threads = await this.fetchThreadsByPage({ ids: this.forum.threads, page: page, perPage: this.perPage })
+      await this.fetchUsers({ ids: threads.map(thread => thread.userId) })
+    }
+  },
   methods: {
     ...mapActions('forums', ['fetchForum']),
     ...mapActions('threads', ['fetchThreadsByPage']),

@@ -90,7 +90,8 @@ export default {
 
     fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }, { root: true }),
     fetchThreads: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' }, { root: true }),
-    fetchThreadsByPage: ({ dispatch }, { ids, page, perPage = 10 }) => {
+    fetchThreadsByPage: ({ dispatch, commit }, { ids, page, perPage = 10 }) => {
+      commit('clearThreads')
       const chunks = chunk(ids, perPage)
       const limitedIds = chunks[page - 1]
 
@@ -99,6 +100,9 @@ export default {
   },
   mutations: {
     appendPostToThread: makeAppendChildToParentMutation({ parent: 'threads', child: 'posts' }),
-    appendContributorToThread: makeAppendChildToParentMutation({ parent: 'threads', child: 'contributors' })
+    appendContributorToThread: makeAppendChildToParentMutation({ parent: 'threads', child: 'contributors' }),
+    clearThreads (state) {
+      state.items = []
+    }
   }
 }
