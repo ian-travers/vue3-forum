@@ -2540,3 +2540,12 @@ hr {
     background: #F5F8FE;
     min-height: 100vh;
 }
+
+.Pagination {
+    justify-content: center;
+    margin: 40px !important;
+}
+
+.Pagination .PageActive {
+    color: white;
+}
