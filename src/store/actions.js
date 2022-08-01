@@ -6,10 +6,7 @@ export default {
 
     return new Promise((resolve) => {
       const unsubscribe = firebase.firestore().collection(resource).doc(id).onSnapshot((doc) => {
-        if (once) {
-          unsubscribe()
-          console.log(('unsubscribing for once option!'))
-        }
+        if (once) unsubscribe()
 
         if (doc.exists) {
           const item = { ...doc.data(), id: doc.id }

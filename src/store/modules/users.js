@@ -1,4 +1,4 @@
-import { docToResource, findById, makeAppendChildToParentMutation } from '@/helpers'
+import { docToResource, findById, makeAppendChildToParentMutation, makeFetchItemAction, makeFetchItemsAction } from '@/helpers'
 import firebase from 'firebase'
 
 export default {
@@ -65,8 +65,8 @@ export default {
       commit('setItem', { resource: 'users', item: user }, { root: true })
     },
 
-    fetchUser: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🙋', resource: 'users' }, { root: true }),
-    fetchUsers: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🙋', resource: 'users' }, { root: true })
+    fetchUser: makeFetchItemAction({ emoji: '🙋', resource: 'users' }),
+    fetchUsers: makeFetchItemsAction({ resource: 'users', emoji: '🙋' })
   },
   mutations: {
     appendThreadToUser: makeAppendChildToParentMutation({ parent: 'users', child: 'threads' })

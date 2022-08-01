@@ -1,3 +1,4 @@
+import { makeFetchItemAction, makeFetchItemsAction } from '@/helpers'
 import firebase from 'firebase'
 
 export default {
@@ -7,8 +8,8 @@ export default {
   },
   getters: {},
   actions: {
-    fetchCategory: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '🏷', resource: 'categories' }, { root: true }),
-    fetchCategories: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '🏷', resource: 'categories' }, { root: true }),
+    fetchCategory: makeFetchItemAction({ emoji: '🏷', resource: 'categories' }),
+    fetchCategories: makeFetchItemsAction({ emoji: '🏷', resource: 'categories' }),
     fetchAllCategories ({ commit }) {
       // console.log('🔥', '🏷', 'all')
 

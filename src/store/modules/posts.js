@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import { docToResource } from '@/helpers'
+import { docToResource, makeFetchItemAction, makeFetchItemsAction } from '@/helpers'
 
 export default {
   namespaced: true,
@@ -49,8 +49,8 @@ export default {
       commit('setItem', { resource: 'posts', item: updatedPost }, { root: true })
     },
 
-    fetchPost: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '💬', resource: 'posts' }, { root: true }),
-    fetchPosts: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '💬', resource: 'posts' }, { root: true })
+    fetchPost: makeFetchItemAction({ emoji: '💬', resource: 'posts' }),
+    fetchPosts: makeFetchItemsAction({ emoji: '💬', resource: 'posts' })
   },
   mutations: {}
 }
