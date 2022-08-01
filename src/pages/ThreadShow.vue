@@ -34,9 +34,13 @@ import PostList from '@/components/PostList'
 import PostEditor from '@/components/PostEditor'
 import { mapActions, mapGetters } from 'vuex'
 import asyncDataStatus from '@/mixins/asyncDataStatus'
+import useNotifications from '@/composibles/useNotifications'
 
 export default {
   name: 'ThreadShow',
+  setup () {
+    const { addNotification } = useNotifications()
+  },
   components: { PostEditor, PostList },
   props: {
     id: {
