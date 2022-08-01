@@ -1,11 +1,16 @@
 import firebase from 'firebase'
 
 export default {
-  fetchItem ({ state, commit }, { id, emoji, resource, handleUnsubscribe = null }) {
+  fetchItem ({ state, commit }, { id, emoji, resource, handleUnsubscribe = null, once = null }) {
     console.log('🔥', emoji, id)
 
     return new Promise((resolve) => {
       const unsubscribe = firebase.firestore().collection(resource).doc(id).onSnapshot((doc) => {
+        if (once) {
+          unsubscribe()
+          console.log(('unsubscribing for once option!'))
+        }
+
         if (doc.exists) {
           const item = { ...doc.data(), id: doc.id }
           commit('setItem', { resource, item })

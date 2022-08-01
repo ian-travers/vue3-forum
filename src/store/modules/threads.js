@@ -88,7 +88,7 @@ export default {
       return docToResource(newThread)
     },
 
-    fetchThread: ({ dispatch }, { id }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads' }, { root: true }),
+    fetchThread: ({ dispatch }, { id, once = false }) => dispatch('fetchItem', { id, emoji: '📄', resource: 'threads', once }, { root: true }),
     fetchThreads: ({ dispatch }, { ids }) => dispatch('fetchItems', { ids, emoji: '📄', resource: 'threads' }, { root: true }),
     fetchThreadsByPage: ({ dispatch, commit }, { ids, page, perPage = 10 }) => {
       commit('clearThreads')
