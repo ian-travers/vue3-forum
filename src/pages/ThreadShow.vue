@@ -87,7 +87,7 @@ export default {
           console.log(isLocal)
           if (!this.asyncDataStatus_ready || isLocal || (previousItem?.edited && !previousItem?.edited?.at)) return
 
-          this.addNotification({ message: 'Thread recently updated' })
+          this.addNotification({ message: 'Thread recently updated', timeout: 5000 })
         }
       })
 
@@ -109,7 +109,7 @@ export default {
         if (hasNewPosts) {
           await this.fetchPostsWithUsers(newPostIds)
         } else {
-          this.addNotification({ message: 'Thread recently updated' })
+          this.addNotification({ message: 'Thread recently updated', timeout: 4000 })
         }
       }
     })
