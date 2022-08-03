@@ -114,7 +114,7 @@ export default {
       }
     })
 
-    this.fetchPostsWithUsers(thread.posts)
+    await this.fetchPostsWithUsers(thread.posts)
     this.asyncDataStatus_fetched()
   }
 }
