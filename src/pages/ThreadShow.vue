@@ -40,6 +40,8 @@ export default {
   name: 'ThreadShow',
   setup () {
     const { addNotification } = useNotifications()
+
+    return { addNotification }
   },
   components: { PostEditor, PostList },
   props: {
@@ -79,7 +81,12 @@ export default {
   },
   async created () {
     // fetch the thread
-    const thread = await this.fetchThread({ id: this.id })
+    const thread = await this.fetchThread({
+      id: this.id,
+      onSnapshot: () => {
+        this.addNotification({ message: 'Thread recently updated' })
+      }
+    })
 
     // fetch the posts
     const posts = await this.fetchPosts({ ids: thread.posts })
