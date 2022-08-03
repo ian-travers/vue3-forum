@@ -83,8 +83,8 @@ export default {
     // fetch the thread
     const thread = await this.fetchThread({
       id: this.id,
-      onSnapshot: () => {
-        if (!this.asyncDataStatus_ready) return
+      onSnapshot: ({ isLocal }) => {
+        if (!this.asyncDataStatus_ready || isLocal) return
 
         this.addNotification({ message: 'Thread recently updated' })
       }

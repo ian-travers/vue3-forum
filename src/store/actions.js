@@ -16,7 +16,8 @@ export default {
           commit('setItem', { resource, item })
 
           if (typeof onSnapshot === 'function') {
-            onSnapshot({ item: { ...item }, previousItem })
+            const isLocal = doc.metadata.hasPendingWrites
+            onSnapshot({ item: { ...item }, previousItem, isLocal })
           }
           resolve(item)
         } else {
