@@ -84,6 +84,8 @@ export default {
     const thread = await this.fetchThread({
       id: this.id,
       onSnapshot: () => {
+        if (!this.asyncDataStatus_ready) return
+
         this.addNotification({ message: 'Thread recently updated' })
       }
     })
