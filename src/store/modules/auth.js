@@ -52,7 +52,7 @@ export default {
         return url
       } catch (error) {
         const { addNotification } = useNotifications()
-        addNotification({ message: 'Error uploading avatar image' })
+        addNotification({ message: 'Error uploading avatar image', type: 'error' })
       }
     },
 
