@@ -12,7 +12,7 @@
             <AppSpinner v-if="uploadingImage" color="white"/>
             <fa-icon v-else icon="camera" size="3x" :style="{color: 'white', opacity: '80%'}"/>
           </span>
-          <input v-show="false" type="file" id="avatar" accept="image/*" @change="handleAvatarUpload">
+          <input v-show="false" type="file" id="avatar" @change="handleAvatarUpload">
         </label>
       </p>
 
@@ -113,7 +113,8 @@ export default {
     async handleAvatarUpload (e) {
       this.uploadingImage = true
       const file = e.target.files[0]
-      this.activeUser.avatar = await this.uploadAvatar({ file })
+      const uploadedImage = await this.uploadAvatar({ file })
+      this.activeUser.avatar = uploadedImage || this.activeUser.avatar
       this.uploadingImage = false
     },
     save () {
