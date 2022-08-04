@@ -2549,3 +2549,15 @@ hr {
 .Pagination .PageActive {
     color: white;
 }
+
+.avatar-edit {
+    position: relative;
+}
+
+.avatar-edit .avatar-upload-overlay {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

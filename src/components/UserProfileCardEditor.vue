@@ -1,13 +1,17 @@
 <template>
   <div class="profile-card">
     <form @submit.prevent="save">
-      <p class="text-center">
+      <p class="text-center avatar-edit">
         <label for="avatar">
           <img
             class="avatar-xlarge img-update"
-            :src="user.avatar"
+            :src="activeUser.avatar"
             :alt="`${user.name} profile pictute`"
           />
+          <span class="avatar-upload-overlay">
+            <AppSpinner v-if="uploadingImage" color="white"/>
+            <fa-icon v-else icon="camera" size="3x" :style="{color: 'white', opacity: '80%'}"/>
+          </span>
           <input v-show="false" type="file" id="avatar" accept="image/*" @change="handleAvatarUpload">
         </label>
       </p>
@@ -87,9 +91,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
   name: 'UserProfileCardEditor',
+  components: { AppSpinner },
   props: {
     user: {
       type: Object,
@@ -98,14 +104,17 @@ export default {
   },
   data () {
     return {
+      uploadingImage: false,
       activeUser: { ...this.user } // cloning
     }
   },
   methods: {
     ...mapActions('auth', ['uploadAvatar']),
     async handleAvatarUpload (e) {
+      this.uploadingImage = true
       const file = e.target.files[0]
       this.activeUser.avatar = await this.uploadAvatar({ file })
+      this.uploadingImage = false
     },
     save () {
       this.$store.dispatch('users/updateUser', { ...this.activeUser })
