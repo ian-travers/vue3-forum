@@ -3,10 +3,10 @@
     <form @submit.prevent="save">
       <p class="text-center avatar-edit">
         <label for="avatar">
-          <img
+          <AppAvatarImage
             class="avatar-xlarge img-update"
             :src="activeUser.avatar"
-            :alt="`${user.name} profile pictute`"
+            :alt="`${user.name} profile picture`"
           />
           <span class="avatar-upload-overlay">
             <AppSpinner v-if="uploadingImage" color="white"/>
@@ -92,10 +92,11 @@
 <script>
 import { mapActions } from 'vuex'
 import AppSpinner from '@/components/AppSpinner'
+import AppAvatarImage from '@/components/AppAvatarImage'
 
 export default {
   name: 'UserProfileCardEditor',
-  components: { AppSpinner },
+  components: { AppAvatarImage, AppSpinner },
   props: {
     user: {
       type: Object,
