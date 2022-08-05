@@ -4,32 +4,8 @@
       <VeeForm @submit="signIn" class="card card-form">
         <h1 class="text-center">Login</h1>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <VeeField
-            name="email"
-            label="Email"
-            v-model="form.email"
-            id="email"
-            type="email"
-            class="form-input"
-            rules="required|email"
-          />
-          <VeeErrorMessage name="email" class="form-error"/>
-        </div>
-        <div class="form-group">
-          <label for="email">Password</label>
-          <VeeField
-            name="password"
-            label="Password"
-            v-model="form.password"
-            id="password"
-            type="password"
-            class="form-input"
-            rules="required|min:8"
-          />
-          <VeeErrorMessage name="password" class="form-error"/>
-        </div>
+        <AppFormField v-model="form.email" name="email" label="Email" rules="required" type="email"/>
+        <AppFormField v-model="form.password" name="password" label="Password" rules="required" type="password"/>
 
         <div class="push-top">
           <button type="submit" class="btn-blue btn-block">Log in</button>
