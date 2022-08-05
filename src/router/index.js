@@ -124,7 +124,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   await store.dispatch('auth/initAuthentication')
-  console.log(`: navigate to ${to.name} from ${from.name}`)
+  // console.log(`: navigate to ${to.name} from ${from.name}`)
   store.dispatch('unsubscribeAllSnapshots')
 
   if (to.meta.requiresAuth && !store.state.auth.authId) {
