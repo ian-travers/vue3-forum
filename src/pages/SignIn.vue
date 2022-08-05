@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
           <label for="email">Password</label>
-          <VeeField name="password" v-model="form.password" id="password" type="password" class="form-input" rules="required"/>
+          <VeeField name="password" v-model="form.password" id="password" type="password" class="form-input" rules="required|min:8"/>
           <VeeErrorMessage name="password" class="form-error"/>
         </div>
 
