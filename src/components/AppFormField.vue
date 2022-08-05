@@ -17,6 +17,7 @@
 <script>
 export default {
   name: 'AppFormField',
+  inheritAttrs: false,
   props: {
     name: { type: String, required: true },
     label: { type: String, required: true },
