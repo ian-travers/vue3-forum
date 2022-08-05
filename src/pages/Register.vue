@@ -27,7 +27,7 @@
             id="username"
             type="text"
             class="form-input"
-            rules="required"
+            rules="required|unique"
           />
           <VeeErrorMessage name="username" class="form-error"/>
         </div>
