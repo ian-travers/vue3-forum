@@ -72,15 +72,8 @@
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from 'vee-validate'
-
 export default {
   name: 'RegisterForm',
-  components: {
-    VeeForm: Form,
-    VeeField: Field,
-    VeeErrorMessage: ErrorMessage
-  },
   data () {
     return {
       avatarPreview: null,
