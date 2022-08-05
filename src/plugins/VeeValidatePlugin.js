@@ -7,8 +7,17 @@ export default (app) => {
   defineRule('required', required)
   defineRule('email', email)
   defineRule('min', min)
-  defineRule('unique', async (value) => {
-    const querySnapshot = await firebase.firestore().collection('users').where('username', '==', value).get()
+  defineRule('unique', async (value, args) => {
+    console.log(args)
+    let collection, field
+
+    if (Array.isArray(args)) {
+      [collection, field] = args
+    } else {
+      ({ collection, field } = args)
+    }
+
+    const querySnapshot = await firebase.firestore().collection(collection).where(field, '==', value).get()
 
     return querySnapshot.empty
   })
