@@ -1,6 +1,6 @@
 <template>
   <div class="profile-card">
-    <form @submit.prevent="save">
+    <VeeForm @submit="save">
       <p class="text-center avatar-edit">
         <label for="avatar">
           <AppAvatarImage
@@ -17,33 +17,9 @@
       </p>
       <UserProfileCardEditorRandomAvatar @hit="activeUser.avatar = $event"/>
 
-      <div class="form-group">
-        <input
-          v-model="activeUser.username"
-          type="text"
-          placeholder="Username"
-          class="form-input text-lead text-bold"
-        >
-      </div>
-
-      <div class="form-group">
-        <input
-          v-model="activeUser.name"
-          type="text"
-          placeholder="Full Name"
-          class="form-input text-lead text-bold"
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="user_bio">Bio</label>
-        <textarea
-          v-model="activeUser.bio"
-          class="form-input"
-          id="user_bio"
-          placeholder="Write a few words about yourself"
-        ></textarea>
-      </div>
+      <AppFormField v-model="activeUser.username" name="username" label="Username" :rules="`required|unique:users,username,${user.username}`"/>
+      <AppFormField v-model="activeUser.name" name="name" label="Name" rules="required"/>
+      <AppFormField v-model="activeUser.bio" name="bio" label="Bio" as="textarea" rows="4" placeholder="Write a few words about yourself."/>
 
       <div class="stats">
         <span>{{ user.postsCount }} posts</span>
@@ -52,41 +28,15 @@
 
       <hr>
 
-      <div class="form-group">
-        <label for="user_website" class="form-label">Website</label>
-        <input
-          v-model="activeUser.website"
-          autocomplete="off"
-          class="form-input"
-          id="user_website"
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="user_email" class="form-label">Email</label>
-        <input
-          v-model="activeUser.email"
-          autocomplete="off"
-          class="form-input"
-          id="user_email"
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="user_location" class="form-label">Location</label>
-        <input
-          v-model="activeUser.location"
-          autocomplete="off"
-          class="form-input"
-          id="user_location"
-        >
-      </div>
+      <AppFormField v-model="activeUser.website" name="website" label="Website" rules="url"/>
+      <AppFormField v-model="activeUser.email" name="email" label="Email" :rules="`required|unique:users,email,${user.email}`" type="email"/>
+      <AppFormField v-model="activeUser.location" name="location" label="Location"/>
 
       <div class="btn-group space-between">
         <button class="btn-ghost" @click.prevent="cancel">Cancel</button>
         <button class="btn-blue" type="submit">Save</button>
       </div>
-    </form>
+    </VeeForm>
   </div>
 </template>
 
