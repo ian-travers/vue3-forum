@@ -16,11 +16,13 @@
         <div class="form-group">
           <label for="name">Full Name</label>
           <VeeField name="name" v-model="form.name" id="name" type="text" class="form-input" />
+          <VeeErrorMessage name="name" class="form-error"/>
         </div>
 
         <div class="form-group">
           <label for="username">Username</label>
           <VeeField name="username" v-model="form.username" id="username" type="text" class="form-input" />
+          <VeeErrorMessage name="username" class="form-error"/>
         </div>
 
         <div class="form-group">
@@ -65,13 +67,14 @@
 </template>
 
 <script>
-import { Form, Field } from 'vee-validate'
+import { Form, Field, ErrorMessage } from 'vee-validate'
 
 export default {
   name: 'RegisterForm',
   components: {
     VeeForm: Form,
-    VeeField: Field
+    VeeField: Field,
+    VeeErrorMessage: ErrorMessage
   },
   data () {
     return {
