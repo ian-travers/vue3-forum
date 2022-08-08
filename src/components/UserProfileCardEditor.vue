@@ -40,16 +40,22 @@
         <button class="btn-blue" type="submit">Save</button>
       </div>
     </VeeForm>
+    <UserProfileCardEditorReauthenticate
+      v-model="needsReAuth"
+      @success="onReauthenticated"
+      @fail="onReauthenticatedFailed"
+    />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import UserProfileCardEditorRandomAvatar from '@/components/UserProfileCardEditorRandomAvatar'
+import UserProfileCardEditorReauthenticate from '@/components/UserProfileCardEditorReauthenticate'
 
 export default {
   name: 'UserProfileCardEditor',
-  components: { UserProfileCardEditorRandomAvatar },
+  components: { UserProfileCardEditorRandomAvatar, UserProfileCardEditorReauthenticate },
   props: {
     user: {
       type: Object,

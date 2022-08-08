@@ -18,6 +18,11 @@ export default {
       return firebase.auth().currentUser.updateEmail(email)
     },
 
+    async reauthenticate ({ state }, { email, password }) {
+      const credential = firebase.auth.EmailAuthProvider.credential(email, password)
+      await firebase.auth().currentUser.reauthenticateWithCredential(credential)
+    },
+
     initAuthentication ({ commit, state, dispatch }) {
       if (state.authObserverUnsubscribe) return
 
