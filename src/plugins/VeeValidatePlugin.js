@@ -9,7 +9,6 @@ export default (app) => {
   defineRule('min', min)
   defineRule('url', url)
   defineRule('unique', async (value, args) => {
-    console.log(args)
     let collection, field, excluding
 
     if (Array.isArray(args)) {

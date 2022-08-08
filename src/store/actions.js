@@ -3,8 +3,6 @@ import { findById } from '@/helpers'
 
 export default {
   fetchItem ({ state, commit }, { id, emoji, resource, handleUnsubscribe = null, once = null, onSnapshot = null }) {
-    // console.log('🔥', emoji, id)
-
     return new Promise((resolve) => {
       const unsubscribe = firebase.firestore().collection(resource).doc(id).onSnapshot((doc) => {
         if (once) unsubscribe()
