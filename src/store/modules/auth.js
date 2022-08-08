@@ -14,6 +14,10 @@ export default {
     }
   },
   actions: {
+    async updateEmail ({ state }, { email }) {
+      return firebase.auth().currentUser.updateEmail(email)
+    },
+
     initAuthentication ({ commit, state, dispatch }) {
       if (state.authObserverUnsubscribe) return
 
