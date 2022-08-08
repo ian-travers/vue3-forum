@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from '@/helpers/firebase'
 import useNotifications from '@/composibles/useNotifications'
 
 export default {
