@@ -41,7 +41,7 @@ export default {
     commit('clearAllUnsubscribes')
   },
 
-  clearItems (commit, { modules = [] }) {
+  clearItems ({ commit }, { modules = [] }) {
     commit('clearItems', { modules })
   }
 }
