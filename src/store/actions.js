@@ -34,6 +34,7 @@ export default {
   },
 
   fetchItems ({ dispatch }, { ids, emoji, resource, onSnapshot = null }) {
+    ids = ids || []
     return Promise.all(ids.map(id => dispatch('fetchItem', { id, emoji, resource, onSnapshot })))
   },
 

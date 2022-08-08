@@ -2,7 +2,8 @@
   <div class="thread-list">
     <h2 class="list-title">Threads</h2>
 
-    <div v-for="thread in threads" :key="thread.id" class="thread">
+    <div v-if="threads.length">
+      <div v-for="thread in threads" :key="thread.id" class="thread">
       <div>
         <p>
           <router-link
@@ -34,6 +35,10 @@
         </div>
       </div>
     </div>
+    </div>
+  </div>
+  <div v-if="!threads.length" style="padding: 10px; text-align: center">
+    <em>Not Threads Available</em>
   </div>
 </template>
 

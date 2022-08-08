@@ -18,7 +18,6 @@
         v-model="page"
         :pages="totalPages"
         active-color="#57ad8d"
-        @update:modelValue="updateHandler"
       />
     </div>
   </div>
@@ -61,7 +60,7 @@ export default {
         .map(thread => this.$store.getters['threads/thread'](thread.id))
     },
     threadsCount () {
-      return this.forum.threads.length
+      return this.forum.threads?.length || 0
     },
     totalPages () {
       if (!this.threadsCount) return 0
