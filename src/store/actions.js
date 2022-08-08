@@ -41,5 +41,9 @@ export default {
   async unsubscribeAllSnapshots ({ state, commit }) {
     state.unsubscribes.forEach(unsubscribe => unsubscribe())
     commit('clearAllUnsubscribes')
+  },
+
+  clearItems (commit, { modules = [] }) {
+    commit('clearItems', { modules })
   }
 }

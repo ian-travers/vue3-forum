@@ -136,4 +136,8 @@ router.beforeEach(async (to, from) => {
   }
 })
 
+router.afterEach(() => {
+  store.dispatch('clearItems', { modules: ['categories', 'forums', 'threads', 'posts'] })
+})
+
 export default router
