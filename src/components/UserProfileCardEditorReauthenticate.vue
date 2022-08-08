@@ -4,7 +4,7 @@
       <h4>Login Again to Change Your Email</h4>
       <VeeForm @submit="reauthenticate">
         <AppFormField name="reauth-email" label="Email" v-model="email" rules="email"/>
-        <AppFormField name="reauth-password" label="Password" v-model="password" rules="password"/>
+        <AppFormField name="reauth-password" label="Password" v-model="password" rules="required" type="password"/>
         <button class="btn btn-green btn-small">Login</button>
       </VeeForm>
     </div>
