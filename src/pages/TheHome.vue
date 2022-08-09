@@ -1,6 +1,6 @@
 <template>
   <div v-if="asyncDataStatus_ready" class="container">
-    <h1 class="push-top">Welcome to the Forum</h1>
+    <h1 class="push-top">Welcome to the Vue Masterclass Forum </h1>
     <div class="col-full">
       <CategoryList :categories="categories"/>
     </div>
